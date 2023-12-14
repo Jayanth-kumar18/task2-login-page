@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import React, { useState } from 'react';
+import Signup from './Signup';
+import Login from './Login';
+import Dashboard from './Dashboard';
 
-function App() {
+const App = () => {
+  const [user, setUser] = useState(null);
+
+  const handleSignup = (userData) => {
+    // Perform signup logic here and set the user state
+    console.log('Signup:', userData);
+    setUser(userData);
+  };
+
+  const handleLogin = (userData) => {
+    // Perform login logic here and set the user state
+    console.log('Login:', userData);
+    setUser(userData);
+  };
+
+  const handleLogout = () => {
+    // Perform logout logic here and reset the user state
+    console.log('Logout');
+    setUser(null);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {user ? (
+        <Dashboard user={user} onLogout={handleLogout} />
+      ) : (
+        <div>
+          <Signup onSignup={handleSignup} />
+          <Login onLogin={handleLogin} />
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default App;
